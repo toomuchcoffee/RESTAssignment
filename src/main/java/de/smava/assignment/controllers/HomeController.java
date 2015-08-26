@@ -1,4 +1,4 @@
-package de.smava.assignment;
+package de.smava.assignment.controllers;
 
 import java.text.DateFormat;
 import java.util.Date;

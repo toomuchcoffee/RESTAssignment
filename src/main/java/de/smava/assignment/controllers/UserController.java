@@ -1,4 +1,4 @@
-package de.smava.assignment;
+package de.smava.assignment.controllers;
 
 import java.util.List;
 import java.util.Locale;
