@@ -1,7 +1,7 @@
 package de.smava.assignment.services;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,13 +25,10 @@ public class BankAccountService {
 	}
 	
 	public List<BankAccount> getBankAccountsForUserId(Integer userId) {
-		List<BankAccount> filtered = new ArrayList<BankAccount>();
-		for (BankAccount account : getAllBankAccounts()) {
-			if (account.getHolder().getId().equals(userId)) {
-				filtered.add(account);
-			}
-		}
-		return filtered;
+		return getAllBankAccounts()
+				.stream()
+				.filter(a -> a.getHolder().getId().equals(userId))
+				.collect(Collectors.toList());
 	}
 	
 	public void deleteBankAccount(Integer id) {
