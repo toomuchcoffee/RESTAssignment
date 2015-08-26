@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+<c:set var="req" value="${pageContext.request}" />
 <html>
 <head>
 	<title>User</title>
@@ -24,7 +25,7 @@
 	</tr>
 	<tr>
 		<td>Bank accounts</td>
-		<td><a href="/assignment/users/${user.id}/bankaccounts">click</a><td>
+		<td><a href="${req.contextPath}/users/${user.id}/bankaccounts">click</a><td>
 	</tr>
 </table>
 
