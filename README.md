@@ -22,3 +22,14 @@ The REST api has the following routes:
 * POST /users/{userId}/bankaccounts/list (Creates a list of new bank accounts for user)
 * PUT /users/{userId}/bankaccounts/{id}	(Updates existing bank account)
 * DELETE /bankaccounts/{id} (Deletes bank account)
+
+Used technologies/frameworks are
+* JAVA 8
+* Spring
+* Spring MVC
+* Maven
+*­ JUnit
+* Mockito
+*­ jQuery
+* Jackson
+* Pivotal tc Server
