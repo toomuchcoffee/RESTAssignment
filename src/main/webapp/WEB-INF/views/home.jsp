@@ -1,14 +1,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+<c:set var="req" value="${pageContext.request}" />
 <html>
 <head>
 	<title>Home</title>
 </head>
 <body>
 <h1>
-	Hello world!  
+	User and Bank Account Admin
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<ul>
+	<li><a href="${req.contextPath}/users">Users</a></li>
+	<li><a href="${req.contextPath}/bankaccounts">Bank accounts</a></li>
+</ul>
+
 </body>
 </html>

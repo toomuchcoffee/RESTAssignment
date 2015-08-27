@@ -21,7 +21,7 @@ public class BankAccountController {
 
 	@Autowired
 	private BankAccountService service;
-	
+
 	@RequestMapping(value = "/bankaccounts", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 
@@ -44,36 +44,42 @@ public class BankAccountController {
 		return "bankaccounts";
 	}
 
-	@RequestMapping(value = "users/{userId}/bankaccounts", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "users/{userId}/bankaccounts", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody BankAccount post(@PathVariable String userId, @RequestBody final BankAccount bankAccount) {
 		Integer userIdInt = Integer.valueOf(userId);
-		
+
 		service.addBankAccount(bankAccount, userIdInt);
-		
+
 		return bankAccount;
 	}
 
-	@RequestMapping(value = "users/{userId}/bankaccounts/list", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody BankAccount[] postList(@PathVariable String userId, @RequestBody final BankAccount[] bankAccounts) {
+	@RequestMapping(value = "users/{userId}/bankaccounts/list", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody BankAccount[] postList(@PathVariable String userId,
+			@RequestBody final BankAccount[] bankAccounts) {
 		Integer userIdInt = Integer.valueOf(userId);
-		
+
 		for (BankAccount bankAccount : bankAccounts) {
 			service.addBankAccount(bankAccount, userIdInt);
 		}
-		
+
 		return bankAccounts;
 	}
 
-	
-	@RequestMapping(value = "users/{userId}/bankaccounts/{accountId}", method = RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody BankAccount update(
-			@PathVariable String userId, @PathVariable String accountId, @RequestBody final BankAccount bankAccount) {
+	@RequestMapping(value = "users/{userId}/bankaccounts/{accountId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody BankAccount update(@PathVariable String userId, @PathVariable String accountId,
+			@RequestBody final BankAccount bankAccount) {
 		Integer userIdInt = Integer.valueOf(userId);
 		Integer accountIdInt = Integer.valueOf(accountId);
-		
+
 		service.updateBankAccount(userIdInt, accountIdInt, bankAccount);
-		
+
 		return bankAccount;
 	}
 
+	@RequestMapping(value = "bankaccounts/{accountId}", method = RequestMethod.DELETE)
+	public @ResponseBody void delete(@PathVariable String accountId) {
+		Integer accountIdInt = Integer.valueOf(accountId);
+
+		service.deleteBankAccount(accountIdInt);
+	}
 }

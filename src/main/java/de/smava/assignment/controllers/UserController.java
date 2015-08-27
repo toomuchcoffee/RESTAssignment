@@ -59,5 +59,12 @@ public class UserController {
 		
 		return user;
 	}
+	
+	@RequestMapping(value = "users/{userId}", method = RequestMethod.DELETE)
+	public @ResponseBody void delete(@PathVariable String userId) {
+		Integer userIdInt = Integer.valueOf(userId);
+
+		service.deleteUser(userIdInt);
+	}
 
 }

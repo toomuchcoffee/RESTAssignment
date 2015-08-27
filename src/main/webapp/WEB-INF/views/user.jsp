@@ -4,6 +4,22 @@
 <html>
 <head>
 	<title>User</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script>
+		function addBankAccounts() {
+			var url = '${req.contextPath}/users/${user.id}/bankaccounts/list';
+			var data = $("#addbankaccounts").val();
+			$.ajax({
+			    url: url,
+			    data: data,
+			    contentType : 'application/json',
+			    type: 'POST',
+			    success: function(result) {
+			    	window.location.reload(true);
+			    }
+			});
+		}
+	</script>
 </head>
 <body>
 <h1>
@@ -29,5 +45,34 @@
 	</tr>
 </table>
 
+<h2>Add bank accounts for User</h2>
+<table>
+<tr>
+	<td>
+		<textarea id="addbankaccounts">
+[{
+    "id":"456",
+    "iban":"888888888",
+    "bic":"PPPPPPPP"
+},
+{
+    "id":"789",
+    "iban":"666666666",
+    "bic":"STSTSTSTSTS"
+},
+{
+    "id":"999",
+    "iban":"7777777777",
+    "bic":"JKJKJKJKJ"
+}]	
+		</textarea>
+	</td>
+</tr>
+<tr>
+	<td>
+		<a href="#" onclick="addBankAccounts()">Add bank accounts</a>
+	</td>
+</tr>
+</table>
 </body>
 </html>

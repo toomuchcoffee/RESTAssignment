@@ -9,19 +9,18 @@ import org.springframework.stereotype.Service;
 import de.smava.assignment.entities.BankAccount;
 import de.smava.assignment.entities.User;
 import de.smava.assignment.repositories.BankAccountRepository;
-import de.smava.assignment.repositories.UserRepository;
 
 @Service
 public class BankAccountService {
 	
 	@Autowired
-	private BankAccountRepository accountRepository;
+	private BankAccountRepository repository;
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 	
 	public List<BankAccount> getAllBankAccounts() {
-		return accountRepository.findAll();
+		return repository.findAll();
 	}
 	
 	public List<BankAccount> getBankAccountsForUserId(Integer userId) {
@@ -32,24 +31,28 @@ public class BankAccountService {
 	}
 	
 	public void deleteBankAccount(Integer id) {
-		accountRepository.deleteById(id);
+		repository.deleteById(id);
 	}
 	
 	public void addBankAccount(BankAccount bankAccount, Integer userId) {
-		User user = userRepository.findById(userId);
+		User user = userService.getUserForId(userId);
+		
+		if (user == null) {
+			throw new ServiceException();
+		}
 		
 		bankAccount.setHolder(user);
 		
-		accountRepository.create(bankAccount);
+		repository.create(bankAccount);
 	}
 	
 	public void updateBankAccount(Integer userId, Integer accountId, BankAccount bankAccount) {
-		BankAccount existingAccount = accountRepository.findById(accountId);
+		BankAccount existingAccount = repository.findById(accountId);
 		if (existingAccount == null || !accountId.equals(bankAccount.getId())) {
 			throw new ServiceException();
 		} else {
 			bankAccount.setHolder(existingAccount.getHolder());
-			accountRepository.update(bankAccount);
+			repository.update(bankAccount);
 		}
 	}
 	
