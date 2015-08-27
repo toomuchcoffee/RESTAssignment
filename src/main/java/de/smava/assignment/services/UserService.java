@@ -27,7 +27,10 @@ public class UserService {
 	}
 	
 	public void updateUser(Integer userId, User user) {
-		if (userId.equals(user.getId())) {
+		User existingUser = repository.findById(userId);
+		if (existingUser == null || !userId.equals(user.getId())) {
+			throw new ServiceException();
+		} else {
 			repository.update(user);
 		}
 	}

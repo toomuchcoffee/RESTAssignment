@@ -46,7 +46,7 @@ public class BankAccountService {
 	public void updateBankAccount(Integer userId, Integer accountId, BankAccount bankAccount) {
 		BankAccount existingAccount = accountRepository.findById(accountId);
 		if (existingAccount == null || !accountId.equals(bankAccount.getId())) {
-			throw new RuntimeException("Invalid parameters"); // TODO proper error handling
+			throw new ServiceException();
 		} else {
 			bankAccount.setHolder(existingAccount.getHolder());
 			accountRepository.update(bankAccount);
