@@ -32,4 +32,5 @@ Used technologies/frameworks are
 * Mockito
 *­ jQuery
 * Jackson
-* Pivotal tc Server
+
+Tested on Pivotal tc Server
